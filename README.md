@@ -19,6 +19,7 @@ It can not only send the byte data but also send numpy arrays and keras models.
 * Supports data transfer of numpy arrays
 * Supports data transfer of keras models as hdf5 files
 * Supports data transfer of scikit-learn classifiers
+* Support python 3.6, 3.6, 3.8 => Tested on github action
 
 MLSocket inherits the socket object of the built-in python socket, but overrides 4 methods.
 
