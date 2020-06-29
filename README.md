@@ -1,4 +1,7 @@
 # mlsocket
+
+![Build Status](https://github.com/k2sebeom/mlsocket/workflows/Build%20Status/badge.svg?branch=master)
+
 MLSocket is a python package built on top of the python package of socket to easily send and receive numpy arrays and machine learning models through tcp connection.
 
 * Free software: MIT license
