@@ -38,13 +38,13 @@ class TestMLSocket(unittest.TestCase):
     def test_numpy(self):
         """Test for sending numpy through localhost"""
         send_data = np.array([1, 2, 3, 4])
-        print(f"Server sending {send_data}")
+        print(f"\nServer opening at {self.HOST}")
         open_client_process(self.HOST, self.PORT, send_data)
         with MLSocket() as s:
             s.bind((self.HOST, self.PORT))
             s.listen()
             conn, address = s.accept()
-            print(f"Server connected to {address}")
+            print(f"Client accepted with {address}")
             with conn:
                 recv_data = conn.recv(1024)
                 print(f"Server received {recv_data}")
@@ -53,6 +53,23 @@ class TestMLSocket(unittest.TestCase):
                     self.assertEqual(
                         send_data[i], recv_data[i]
                     )
+
+    def test_scikit_learn(self):
+        """Test for sending scikit-learn model through localhost"""
+        expected_gamma = 0.031415
+        send_data = svm.SVC(gamma=expected_gamma)
+        print(f"\nServer opening at {self.HOST}")
+        open_client_process(self.HOST, self.PORT, send_data)
+        with MLSocket() as s:
+            s.bind((self.HOST, self.PORT))
+            s.listen()
+            conn, address = s.accept()
+            print(f"Client accepted with {address}")
+            with conn:
+                recv_data = conn.recv(1024)
+                print(f"Server received {recv_data}")
+                self.assertEqual(type(recv_data), type(send_data))
+                self.assertEqual(recv_data.gamma, expected_gamma)
 
 
 if __name__ == "__main__":
