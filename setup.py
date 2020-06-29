@@ -1,7 +1,7 @@
 from os import path
 from io import open
 from setuptools import setup, find_packages
-
+from importlib.util import find_spec
 
 def get_readme():
     here = path.dirname(__file__)
@@ -24,6 +24,9 @@ def get_requirements():
     with open(path.join(here, 'requirements.txt'),
               encoding='utf8') as requirements_file:
         requirements = requirements_file.read().splitlines()
+        for requirement in requirements:
+            if find_spec(requirement):
+                requirements.remove(requirement)
         return requirements
 
 
