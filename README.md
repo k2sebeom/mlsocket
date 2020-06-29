@@ -32,52 +32,50 @@ The basic usage of the MLSocket is demonstrated by the following scripts of serv
 
 #### Server-Side
 
-.. code-block:: python
+```python
+from mlsocket import MLSocket
 
-    from mlsocket import MLSocket
-    
-    HOST = '127.0.0.1'
-    PORT = 65432
+HOST = '127.0.0.1'
+PORT = 65432
 
-    with MLSocket() as s:
-        s.bind((HOST, PORT))
-        s.listen()
-        conn, address = s.accept()
+with MLSocket() as s:
+    s.bind((HOST, PORT))
+    s.listen()
+    conn, address = s.accept()
 
-        with conn:
-            data = conn.recv(1024) # This will block until it receives all the data send by the client, with the step size of 1024 bytes.
-            model = conn.recv(1024) # This will also block until it receives all the data.
-            clf = conn.recv(1024) # Same
+    with conn:
+        data = conn.recv(1024) # This will block until it receives all the data send by the client, with the step size of 1024 bytes.
+        model = conn.recv(1024) # This will also block until it receives all the data.
+        clf = conn.recv(1024) # Same
+```
 
 #### Client-Side
+```python
+from mlsocket import MLSocket
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn import svm
+import numpy as np
 
-.. code-block:: python
+HOST = '127.0.0.1'
+PORT = 65432
 
-    from mlsocket import MLSocket
-    from keras.models import Sequential
-    from keras.layers import Dense
-    from sklearn import svm
-    import numpy as np
+# Make an ndarray
+data = np.array([1, 2, 3, 4])
 
-    HOST = '127.0.0.1'
-    PORT = 65432
-    
-    # Make an ndarray
-    data = np.array([1, 2, 3, 4])
+# Make a keras model
+model = Sequential()
+model.add(Dense(8, input_shape=(None, 4)))
+model.compile(optimizer='adam', loss='binary_crossentropy')
 
-    # Make a keras model
-    model = Sequential()
-    model.add(Dense(8, input_shape=(None, 4)))
-    model.compile(optimizer='adam', loss='binary_crossentropy')
+# Make a scikit-learn classifier
+clf = svm.SVC(gamma=0.00314)
 
-    # Make a scikit-learn classifier
-    clf = svm.SVC(gamma=0.00314)
-
-    # Send data
-    with MLSocket() as s:
-        s.connect((HOST, PORT)) # Connect to the port and host
-        s.send(data) # After sending the data, it will wait until it receives the reponse from the server
-        s.send(model) # This will wait as well
-        s.send(clf) # Same
-
+# Send data
+with MLSocket() as s:
+    s.connect((HOST, PORT)) # Connect to the port and host
+    s.send(data) # After sending the data, it will wait until it receives the reponse from the server
+    s.send(model) # This will wait as well
+    s.send(clf) # Same
+```
     
