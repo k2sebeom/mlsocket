@@ -3,6 +3,7 @@ from io import open
 from setuptools import setup, find_packages
 from importlib.util import find_spec
 
+
 def get_readme():
     here = path.dirname(__file__)
     with open(path.join(here, 'README.md'),
@@ -32,7 +33,7 @@ def get_requirements():
 
 setup(
     name='mlsocket',
-    version='0.1.0',
+    version='0.1.1',
     author='SeBeom Lee',
     author_email='moses97@gmail.com',
     description='Python socket for machine learning data',
