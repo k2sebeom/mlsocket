@@ -35,6 +35,21 @@ class TestMLSocket(unittest.TestCase):
         self.HOST = '127.0.0.1'
         self.PORT = 65432
 
+    def test_bytes(self):
+        """Test for sending byte data through localhost"""
+        send_data = b'Hello World'
+        print(f"\nServer opening at {self.HOST}")
+        open_client_process(self.HOST, self.PORT, send_data)
+        with MLSocket() as s:
+            s.bind((self.HOST, self.PORT))
+            s.listen()
+            conn, address = s.accept()
+            print(f"Client accepted with {address}")
+            with conn:
+                recv_data = conn.recv(1024)
+                print(f"Server received {recv_data}")
+                self.assertEqual(recv_data, send_data)
+
     def test_numpy(self):
         """Test for sending numpy through localhost"""
         send_data = np.array([1, 2, 3, 4])

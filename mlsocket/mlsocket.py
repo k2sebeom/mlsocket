@@ -24,6 +24,8 @@ class MLSocket(socket.socket):
 
     @staticmethod
     def __parse_data(data):
+        if isinstance(data, bytes):
+            return data
         buffer = BytesIO()
         if isinstance(data, np.ndarray):
             np.save(buffer, data, allow_pickle=True)
@@ -37,7 +39,7 @@ class MLSocket(socket.socket):
 
     @staticmethod
     def __load_data(file: BytesIO):
-        data = file.read()
+        data = file.read()[:-3]
         file.seek(0)
         if b'NUMPY' in data:
             return np.load(file)
@@ -47,6 +49,8 @@ class MLSocket(socket.socket):
             with h5py.File(file, 'r') as f:
                 model = load_model(f)
             return model
+        else:
+            return data
 
     def sendall(self, data: bytes, flags: int = ...) -> None:
         data = self.__parse_data(data)
