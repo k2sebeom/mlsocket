@@ -13,7 +13,7 @@ if os.environ.get('TF_CPP_MIN_LOG_LEVEL') != '3':
 
 
 class MLSocket(socket.socket):
-    def __init__(self, proto=-1, fileno=None):
+    def __init__(self, proto=0, fileno=None):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM, proto, fileno)
 
     def accept(self):
