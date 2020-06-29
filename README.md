@@ -14,9 +14,13 @@ It can not only send the byte data but also send numpy arrays and keras models.
 ## Installation
 
     $ pip install mlsocket --user
-    
+
 
 ## Features
+
+| System | Linux | macOS | Windows |
+| :---: | :---: | :---: | :---: |
+| Status | [![Unit Test (Ubuntu)](https://github.com/k2sebeom/mlsocket/workflows/Unit%20Test%20(Ubuntu)/badge.svg?branch=master)](https://github.com/k2sebeom/mlsocket/actions?query=workflow%3A%22Unit+Test+%28Ubuntu%29%22) | [![Unit Test (macOS)](https://github.com/k2sebeom/mlsocket/workflows/Unit%20Test%20(macOS)/badge.svg?branch=master)](https://github.com/k2sebeom/mlsocket/actions?query=workflow%3A%22Unit+Test+%28macOS%29%22) | [![Unit Test (Windows)](https://github.com/k2sebeom/mlsocket/workflows/Unit%20Test%20(Windows)/badge.svg?branch=master)](https://github.com/k2sebeom/mlsocket/actions?query=workflow%3A%22Unit+Test+%28Windows%29%22) |
 
 * Supports Windows 10, Ubuntu, and macOs => Tested on github action
 * Supports data transfer of numpy arrays
