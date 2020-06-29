@@ -1,6 +1,9 @@
 # mlsocket
 
+[![PyPI version](https://badge.fury.io/py/mlsocket.svg)](https://badge.fury.io/py/mlsocket)
+[![image](https://img.shields.io/pypi/pyversions/mlsocket.svg)](https://pypi.python.org/pypi/mlsocket)
 ![Build Status](https://github.com/k2sebeom/mlsocket/workflows/Build%20Status/badge.svg?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/k2sebeom/mlsocket/blob/master/LICENSE)
 
 MLSocket is a python package built on top of the python package of socket to easily send and receive numpy arrays and machine learning models through tcp connection.
 
