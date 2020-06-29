@@ -6,12 +6,14 @@ import h5py
 from io import BytesIO
 from joblib import dump, load
 from socket import getdefaulttimeout
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-from keras.models import load_model, save_model
+
+if os.environ.get('TF_CPP_MIN_LOG_LEVEL') != '3':
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+    from keras.models import load_model, save_model
 
 
 class MLSocket(socket.socket):
-    def __init__(self, proto=-1, fileno=None):
+    def __init__(self, proto=0, fileno=None):
         super().__init__(socket.AF_INET, socket.SOCK_STREAM, proto, fileno)
 
     def accept(self):
@@ -24,6 +26,8 @@ class MLSocket(socket.socket):
 
     @staticmethod
     def __parse_data(data):
+        if isinstance(data, bytes):
+            return data
         buffer = BytesIO()
         if isinstance(data, np.ndarray):
             np.save(buffer, data, allow_pickle=True)
@@ -37,7 +41,7 @@ class MLSocket(socket.socket):
 
     @staticmethod
     def __load_data(file: BytesIO):
-        data = file.read()
+        data = file.read()[:-3]
         file.seek(0)
         if b'NUMPY' in data:
             return np.load(file)
@@ -47,6 +51,8 @@ class MLSocket(socket.socket):
             with h5py.File(file, 'r') as f:
                 model = load_model(f)
             return model
+        else:
+            return data
 
     def sendall(self, data: bytes, flags: int = ...) -> None:
         data = self.__parse_data(data)

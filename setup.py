@@ -3,15 +3,6 @@ from io import open
 from setuptools import setup, find_packages
 
 
-def get_about():
-    here = path.dirname(__file__)
-    about = {}
-    with open(path.join(here, './modi/about.py'),
-              encoding='utf8') as about_file:
-        exec(about_file.read(), about)
-        return about
-
-
 def get_readme():
     here = path.dirname(__file__)
     with open(path.join(here, 'README.md'),
@@ -36,26 +27,21 @@ def get_requirements():
         return requirements
 
 
-about = get_about()
 setup(
-    name=about['__title__'],
-    version=about['__version__'],
-    author=about['__author__'],
-    author_email=about['__email__'],
-    description=about['__summary__'],
-    long_description=get_readme() + '\n' + get_history(),
+    name='mlsocket',
+    version='0.1.0',
+    author='SeBeom Lee',
+    author_email='moses97@gmail.com',
+    description='Python socket for machine learning data',
+    long_description=get_readme(),
     long_description_content_type="text/markdown",
     install_requires=get_requirements(),
-    license=about['__license__'],
+    license='MIT',
     include_package_data=True,
-    keywords=["pymodi", "modi", "luxrobo"],
-    packages=find_packages(include=['modi', 'modi.util', 'modi.task',
-                                    'modi.module',
-                                    'modi.module.setup_module',
-                                    'modi.module.input_module',
-                                    'modi.module.output_module']),
+    keywords=["socket", "ml", "machine learning"],
+    packages=find_packages(include=['mlsocket']),
     test_suite="tests",
-    url=about['__url__'],
+    url='https://github.com/k2sebeom/mlsocket',
     classifiers=[
         "Natural Language :: English",
         "Intended Audience :: Developers",
@@ -63,9 +49,6 @@ setup(
         'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
         "License :: OSI Approved :: MIT License",
     ],
 )
