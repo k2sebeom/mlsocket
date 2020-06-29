@@ -7,7 +7,7 @@ from io import BytesIO
 from joblib import dump, load
 from socket import getdefaulttimeout
 
-if os.environ['TF_CPP_MIN_LOG_LEVEL'] != '3':
+if os.environ.get('TF_CPP_MIN_LOG_LEVEL') != '3':
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     from keras.models import load_model, save_model
 
