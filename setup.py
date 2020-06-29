@@ -24,11 +24,7 @@ def get_requirements():
     here = path.dirname(__file__)
     with open(path.join(here, 'requirements.txt'),
               encoding='utf8') as requirements_file:
-        requirements = requirements_file.read().splitlines()
-        for requirement in requirements:
-            if find_spec(requirement):
-                requirements.remove(requirement)
-        return requirements
+        return requirements_file.read().splitlines()
 
 
 setup(

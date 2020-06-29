@@ -1,4 +1,3 @@
-tensorflow
-keras
 numpy
-scikit-learn
+h5py
+joblib
