@@ -3,13 +3,9 @@ import socket
 import numpy as np
 import h5py
 
+from joblib import load, dump
 from io import BytesIO
-from joblib import dump, load
 from socket import getdefaulttimeout
-
-if os.environ.get('TF_CPP_MIN_LOG_LEVEL') != '3':
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-    from keras.models import load_model, save_model
 
 
 class MLSocket(socket.socket):
@@ -32,6 +28,8 @@ class MLSocket(socket.socket):
         if isinstance(data, np.ndarray):
             np.save(buffer, data, allow_pickle=True)
         elif 'keras' in str(type(data)):
+            os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+            from tensorflow.keras.models import save_model
             with h5py.File(buffer, 'w') as f:
                 save_model(data, f, include_optimizer=True)
         elif 'sklearn' in str(type(data)):
@@ -48,6 +46,8 @@ class MLSocket(socket.socket):
         elif b'sklearn' in data:
             return load(file)
         elif b'HDF' in data:
+            os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+            from tensorflow.keras.models import load_model
             with h5py.File(file, 'r') as f:
                 model = load_model(f)
             return model
