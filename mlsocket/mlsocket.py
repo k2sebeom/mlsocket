@@ -7,10 +7,6 @@ import h5py
 from io import BytesIO
 from socket import getdefaulttimeout
 
-if os.environ.get('TF_CPP_MIN_LOG_LEVEL') != '3':
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-    from keras.models import load_model, save_model
-
 
 class MLSocket(socket.socket):
     def __init__(self, proto=0, fileno=None):
