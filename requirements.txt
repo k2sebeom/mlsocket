@@ -1,4 +1,3 @@
-pyserial
-enum34
-python-can
-requests
+keras
+numpy
+scikit-learn
