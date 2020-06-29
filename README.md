@@ -1,4 +1,7 @@
 # mlsocket
+
+![Build Status](https://github.com/k2sebeom/mlsocket/workflows/Build%20Status/badge.svg?branch=master)
+
 MLSocket is a python package built on top of the python package of socket to easily send and receive numpy arrays and machine learning models through tcp connection.
 
 * Free software: MIT license
@@ -11,14 +14,19 @@ It can not only send the byte data but also send numpy arrays and keras models.
 ## Installation
 
     $ pip install mlsocket --user
-    
+
 
 ## Features
+
+| System | Linux | macOS | Windows |
+| :---: | :---: | :---: | :---: |
+| Status | [![Unit Test (Ubuntu)](https://github.com/k2sebeom/mlsocket/workflows/Unit%20Test%20(Ubuntu)/badge.svg?branch=master)](https://github.com/k2sebeom/mlsocket/actions?query=workflow%3A%22Unit+Test+%28Ubuntu%29%22) | [![Unit Test (macOS)](https://github.com/k2sebeom/mlsocket/workflows/Unit%20Test%20(macOS)/badge.svg?branch=master)](https://github.com/k2sebeom/mlsocket/actions?query=workflow%3A%22Unit+Test+%28macOS%29%22) | [![Unit Test (Windows)](https://github.com/k2sebeom/mlsocket/workflows/Unit%20Test%20(Windows)/badge.svg?branch=master)](https://github.com/k2sebeom/mlsocket/actions?query=workflow%3A%22Unit+Test+%28Windows%29%22) |
 
 * Supports Windows 10, Ubuntu, and macOs => Tested on github action
 * Supports data transfer of numpy arrays
 * Supports data transfer of keras models as hdf5 files
 * Supports data transfer of scikit-learn classifiers
+* Support python 3.6, 3.6, 3.8 => Tested on github action
 
 MLSocket inherits the socket object of the built-in python socket, but overrides 4 methods.
 
