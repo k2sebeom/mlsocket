@@ -10,7 +10,7 @@ from importlib.util import find_spec
 
 TEST_KERAS = True
 
-if find_spec('tensorflow'):
+if not find_spec('tensorflow'):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     from tensorflow.keras.models import load_model
     TEST_KERAS = False
