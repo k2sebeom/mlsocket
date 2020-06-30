@@ -28,7 +28,7 @@ def get_requirements():
 
 setup(
     name='mlsocket',
-    version='0.1.1',
+    version='0.1.2',
     author='SeBeom Lee',
     author_email='moses97@gmail.com',
     description='Python socket for machine learning data',
