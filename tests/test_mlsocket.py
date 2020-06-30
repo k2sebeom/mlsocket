@@ -8,12 +8,12 @@ from mlsocket import MLSocket
 from importlib.util import find_spec
 
 
-TEST_KERAS = True
+TEST_KERAS = False
 
-if not find_spec('tensorflow'):
+if find_spec('tensorflow'):
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     from tensorflow.keras.models import load_model
-    TEST_KERAS = False
+    TEST_KERAS = True
 
 
 class Client_Process(mp.Process):
