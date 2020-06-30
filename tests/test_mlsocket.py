@@ -33,7 +33,7 @@ class TestMLSocket(unittest.TestCase):
 
     def setUp(self) -> None:
         self.HOST = '127.0.0.1'
-        self.PORT = 65432
+        self.PORT = np.random.randint(0, 65535)
 
     def test_bytes(self):
         """Test for sending byte data through localhost"""
